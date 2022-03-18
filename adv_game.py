@@ -1,7 +1,10 @@
 from json import loads, dump
 import time
-def help():
-    print("Available commands:\n'status': Shows character health, potions and equipped weapons\n'equip': Shows available weapons and allows you to equip them\n'heal': Consumes a potion that heals for 30 health\n'help': Show this message again")
+def h():
+    """
+    Prints available commands
+    """
+    print("Available commands:\n'status': Shows character health, potions and equipped weapons\n'equip': Shows available weapons and allows you to equip them\n'heal': Consumes a potion that heals for 30 health\n'h': Show this message again")
 
 def read_page(pn:int) -> list:
     with open("game.json") as file:
@@ -10,7 +13,12 @@ def read_page(pn:int) -> list:
     print(lst[pn][0])
     return lst[pn][1]
 
-def read_alternatives(page: list) :
+def read_alternatives(page: list) -> None:
+    """Reads alternatives from list within page
+
+    Args:
+        page (list): list of alternatives
+    """
     for alternative in page:
         print("(" + alternative[0] + ")", alternative[1])
     
@@ -22,7 +30,12 @@ def read_alternatives(page: list) :
                 return alternative[2]
         user_choice = choice().upper()
 
-def choice(text = "Select: "):
+def choice(text = "Select: ") -> None:
+    """Takes input from user and calls appropriate functions
+
+    Args:
+        text (str, optional):. Defaults to "Select: ".
+    """
     character_data = read_character_data()
     user_choice = input(text)
     if user_choice == "status":
@@ -33,11 +46,22 @@ def choice(text = "Select: "):
         save_character_data(character_data)
     elif user_choice == "heal":
         drink_potion(character_data)
-    elif user_choice == "help":
-        help()
+    elif user_choice == "h":
+        h()
+    elif user_choice == "p":
+        print(character_data["last_page_number"])
+        if character_data["last_page_number"] == 2:
+            character_data["weapons"]["Rusty sword"] = 1
+            save_character_data(character_data)
+        
     return user_choice
 
-def new_game(character):
+def new_game(character) -> None:
+    """Resets all character data to default values
+
+    Args:
+        character (dict): Contains info about character.
+    """
     character["last_page_number"] = 0
     character["health"] = 100
     character["potions"] = 0
@@ -49,18 +73,33 @@ def new_game(character):
     character["equipped weapon"] = ""
     save_character_data(character)
 
-def read_character_data():
+def read_character_data()-> dict:
+    """Reads from save file and returns character data
+
+    Returns:
+        dict: dictionary with character data
+    """
     with open("save.json") as save_file:
         save_data = save_file.read()
     character_data = loads(save_data)
     return character_data
 
-def save_character_data(character):
+def save_character_data(character)-> None:
+    """Saves character data to file
+
+    Args:
+        character (dict): character info
+    """
     with open("save.json", "w") as save_file:
         save_file.flush()
         dump(character, save_file, indent=4)
 
-def equip_character(character):
+def equip_character(character)-> None:
+    """Equips weapons to character
+
+    Args:
+        character (dict): current character info
+    """
     weapons = character["weapons"]
     print("Available weapons: ")
     weapon_count = 0
@@ -81,7 +120,12 @@ def equip_character(character):
                 save_character_data(character)
                 return
     
-def drink_potion(character):
+def drink_potion(character)-> None:
+    """Uses potions to heal a character.
+
+    Args:
+        character (dict): current character data
+    """
     if character["potions"] >= 1:
         if character["health"] > 99:
             print("Already at full health")
@@ -105,7 +149,13 @@ def drink_potion(character):
         save_character_data(character)
         return
     
-def character_status(character):
+def character_status(character)-> None:
+    """Shows current health, potions and equipped weapons.
+
+    Args:
+        character (dict): current character info
+    """
+
     health = ["Health: ", str(character["health"])]
     potions = ["Potions: ", str(character["potions"])]
     eq_weapons = ["Equipped weapon: ", str(character["equipped weapon"])]
@@ -117,7 +167,9 @@ def character_status(character):
         print("-"*40)
 
 
-def main():
+def main()-> None:
+    """Main game loop
+    """
     #Initialize:
     character_data = read_character_data()
     page_number  = character_data["last_page_number"]
@@ -134,11 +186,12 @@ def main():
                 time.sleep(0.1)
             start_game = True
 
-    help()
+    h()
     while page_number >= 0:
         page_number = read_alternatives(read_page(page_number))
         if not page_number == -1:
             character_data["last_page_number"] = page_number
             save_character_data(character_data)
+
 
 main()
