@@ -1,6 +1,6 @@
 [
     [
-        "Where do you want to move?\nChoose wisely.",
+        "Where do you want to move?\nChoose wisely.", 
         [
             ["L", "Left", 1],
             ["R", "Right", 2]
@@ -10,13 +10,14 @@
         "You are at Left.",
         [
             ["Q", "Quit", -1],
-            ["B", "Go_Back", 0]
+            ["B", "Go Back", 0]
         ]
     ],
     [
         "You are at Right.",
         [
-            ["Q", "Quit", -1]
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
         ]
     ]
 ]
