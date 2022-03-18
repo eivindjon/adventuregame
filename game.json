@@ -14,6 +14,70 @@
         ]
     ],
     [
+        "You are at Right. You see a the tip of a rusty sword sticking out of a pile of bones.\nThis seems to be a dead end..",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0],
+            ["P", "Pick up the rusty sword", 3]
+        ]
+    ],
+    [
+        "You picked up the sword from the pile of bones",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
+        ]
+    ],
+    [
+        "You are at Right.",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
+        ]
+    ],
+    [
+        "You are at Right.",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
+        ]
+    ],
+    [
+        "You are at Right.",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
+        ]
+    ],
+    [
+        "You are at Right.",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
+        ]
+    ],
+    [
+        "You are at Right.",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
+        ]
+    ],
+    [
+        "You are at Right.",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
+        ]
+    ],
+    [
+        "You are at Right.",
+        [
+            ["Q", "Quit", -1],
+            ["B", "Go Back", 0]
+        ]
+    ],
+    [
         "You are at Right.",
         [
             ["Q", "Quit", -1],
