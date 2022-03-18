@@ -1,7 +1,7 @@
 from json import loads, dump
 import time
 def help():
-    print("Available commands:\n'status': Shows character health, potions and equipped weapons\n'equip': Shows available weapons and allows you to equip them\n'heal': Consumes a potion that heals for 30 health")
+    print("Available commands:\n'status': Shows character health, potions and equipped weapons\n'equip': Shows available weapons and allows you to equip them\n'heal': Consumes a potion that heals for 30 health\n'help': Show this message again")
 
 def read_page(pn:int) -> list:
     with open("game.json") as file:

@@ -1,13 +1,13 @@
 {
-    "last_page_number": 2,
+    "last_page_number": 0,
     "health": 100,
     "potions": 0,
     "weapons": {
         "Sword": 0,
         "Bow": 0,
-        "Dagger": 1,
+        "Dagger": 0,
         "Club": 0,
         "Rusty sword": 0
     },
-    "equipped weapon": "Dagger"
+    "equipped weapon": ""
 }
