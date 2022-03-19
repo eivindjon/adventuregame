@@ -1,6 +1,5 @@
 from json import loads, dump
 from logging import critical
-from re import L
 import time
 import random
 from math import floor
@@ -89,6 +88,9 @@ def choice(text = "Select: ") -> None:
         elif character_data["last_page_number"] == 6:
             fight = fight_scenario(character_data,"Skeleton", 140)
             character_data=read_character_data()
+            character_data["weapons"]["Dagger (+20dmg)"] = 1
+            character_data["potions"] += 2
+            save_character_data(character_data)
             if fight == -1:
                 return "Q"
     elif user_choice == "o":
@@ -109,7 +111,7 @@ def new_game(character) -> None:
     character["potions"] = 0
     character["weapons"]["Sword (+50dmg)"] = 0
     character["weapons"]["Bow"] = 0
-    character["weapons"]["Dagger"] = 0
+    character["weapons"]["Dagger (+20dmg)"] = 0
     character["weapons"]["Club"] = 0
     character["weapons"]["Rusty sword (+30dmg)"] = 0
     character["equipped weapon"] = ""
@@ -148,14 +150,17 @@ def equip_character(character)-> None:
     weapon_count = 0
     for weapon in weapons:
         if weapons[weapon] == 1:
-            print("("+ weapon[0] + ")", weapon)
+            if weapon == "Dagger (+20dmg)":
+                print("(D) Dagger (+20dmg) 4x critical hit damage")
+            else:
+                print("("+ weapon[0] + ")", weapon)
             weapon_count += 1
     if weapon_count == 0:
         print("No weapons available")
         return
     weapon_equipped = False
     while not weapon_equipped:
-        selection = choice("What weapon would you like to equip? ").upper()
+        selection = choice("What weapon would you like to equip?\nSelect: ").upper()
         for weapon in weapons:
             if selection == weapon[0]:
                 character["equipped weapon"] = weapon
@@ -171,7 +176,7 @@ def fight_scenario(character, enemy:str, enemy_health):
         weapon_damage = {
         "Sword (+50dmg)": 50,
         "Bow": 10,
-        "Dagger": 15,
+        "Dagger (+20dmg)": 20,
         "Club": 45,
         "Rusty sword (+30dmg)": 30,
         "Unarmed": 1
@@ -185,11 +190,19 @@ def fight_scenario(character, enemy:str, enemy_health):
         critical = random.randint(0, 1)
         if entity == "self":
             damage = weapon_damage[weapon]
+            
+
             if critical:
-                damage = floor(damage * 1.4)
-                print("You hit for", damage, "(Critical!)")
-                time.sleep(1)
-                return damage
+                if weapon == "Dagger (+20dmg)":
+                    damage = floor(damage * 4)
+                    print("You hit for", damage, "(Critical!)")
+                    time.sleep(1)
+                    return damage
+                else:
+                    damage = floor(damage * 1.4)
+                    print("You hit for", damage, "(Critical!)")
+                    time.sleep(1)
+                    return damage
             else:
                 print("You hit for", damage)
                 time.sleep(1)
@@ -208,7 +221,7 @@ def fight_scenario(character, enemy:str, enemy_health):
                 return damage
             
 
-    while not(character["health"] < 0 or enemy_health < 0):
+    while not(character["health"] <= 0 or enemy_health <= 0):
         print(enemy + " health:", enemy_health)
         print("-"*30)
         print("Your health:", character["health"])
@@ -222,6 +235,8 @@ def fight_scenario(character, enemy:str, enemy_health):
         else:
             #Your attack
             enemy_health -= attack(character["equipped weapon"], "self")
+            if enemy_health <= 0:
+                break
             #Enemy attack
             character["health"] -= attack("Ogre", enemy)
     if character["health"] > 0:
