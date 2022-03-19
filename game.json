@@ -16,7 +16,7 @@
         ]
     ],
     [
-        "You are at Right. You see a the tip of a rusty sword sticking out of a pile of bones.\nThis seems to be a dead end..",
+        "You enter a small room. You see a the tip of a rusty sword sticking out of a pile of bones.\nThis seems to be a dead end..",
         [
             ["Q", "Quit", -1],
             ["B", "Go Back", 0],
@@ -47,43 +47,48 @@
         ]
     ],
     [
-        "Before you stands a skeleton",
+        "You enter a long hallway. Before you stands a skeleton. It looks at you with its red eyes.\nIt lifts a nasty looking finger and points at you.",
         [
             ["F", "Fight", 7],
             ["Q", "Quit", -1],
-            ["B", "Go Back", 0]
+            ["B", "Go Back", 5]
         ]
     ],
     [
         "You rummage through the remains of the skeleton and find two potions and a dagger. You put the items in your backpack",
         [
             ["Q", "Quit", -1],
-            ["B", "Go Back", 0]
+            ["B", "Go Back", 6],
+            ["G", "Go through the door at the end of the hallway.", 8]
         ]
     ],
     [
-        "You are at Right.",
+        "You have entered what seems to be a jail complex. You hear footsteps walking the halls.\nDo you want to:",
         [
             ["Q", "Quit", -1],
-            ["B", "Go Back", 0]
+            ["B", "Go Back", 7],
+            ["S", "Sneak past", 10],
+            ["F", "Fight", 9]
         ]
     ],
     [
-        "You are at Right.",
+        "After defeating the jailer you take his key and unlock a vault. Inside you find four health potions and a huge sword.\nWhen lifted you realize it weighs next to nothing. You strap the sword to your back.\nBefore leaving you notice a vial with a glowing liquid inside. You say 'fuck it' and down the whole vial.\nYou feel the power flow through your veins. After checking your status you exlaim 'Wow!'",
         [
             ["Q", "Quit", -1],
-            ["B", "Go Back", 0]
+            ["B", "Go Back", 8],
+            ["E", "Exit the jail", 10]
         ]
     ],
     [
-        "You are at Right.",
+        "When exiting the jail you enter a big cavern. You can smell the scent of fresh air and realize you must be close to an exit.\nOn the other side of the room you see a small door with light showing between the cracks in the doors surface.\nGuarding it is an elf with two swords across his back. ",
         [
             ["Q", "Quit", -1],
-            ["B", "Go Back", 0]
+            ["B", "Go Back", 8],
+            ["F", "Fight", 11]
         ]
     ],
     [
-        "You are at Right.",
+        "After slaying the obnoxious elf you exit the door and find yourself in the woods. You breathe a sigh of relief and head home.",
         [
             ["Q", "Quit", -1],
             ["B", "Go Back", 0]

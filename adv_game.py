@@ -41,6 +41,7 @@ def read_alternatives(page: list) -> None:
             if user_choice == alternative[0]:
                 return alternative[2]
         user_choice = choice().upper()
+
 def visited_before(page:int)->bool:
     """Check if user has visited page in story before. To prevent item duplication.
 
@@ -56,7 +57,7 @@ def visited_before(page:int)->bool:
     else:
         return False
 
-def choice(text = "Select: ") -> None:
+def choice(text:str = "Select: ") -> None:
     """Takes input from user and calls appropriate functions
 
     Args:
@@ -80,6 +81,7 @@ def choice(text = "Select: ") -> None:
             character_data["weapons"]["Rusty sword (+30dmg)"] = 1
             save_character_data(character_data)
     elif user_choice == "f":
+        #Handles the fight sequences
         if character_data["last_page_number"] == 1:
             fight = fight_scenario(character_data,"Ogre", 100)
             character_data=read_character_data()
@@ -91,6 +93,20 @@ def choice(text = "Select: ") -> None:
             character_data["weapons"]["Dagger (+20dmg)"] = 1
             character_data["potions"] += 2
             save_character_data(character_data)
+            if fight == -1:
+                return "Q"
+        elif character_data["last_page_number"] == 8:
+            fight = fight_scenario(character_data,"Jailer", 200)
+            character_data=read_character_data()
+            character_data["weapons"]["Huge sword (+70dmg)"] = 1
+            character_data["potions"] += 4
+            character_data["health"] += 100
+            save_character_data(character_data)
+            if fight == -1:
+                return "Q"
+        elif character_data["last_page_number"] == 10:
+            fight = fight_scenario(character_data,"Elf", 300)
+            character_data=read_character_data()
             if fight == -1:
                 return "Q"
     elif user_choice == "o":
@@ -110,7 +126,7 @@ def new_game(character) -> None:
     character["health"] = 100
     character["potions"] = 0
     character["weapons"]["Sword (+50dmg)"] = 0
-    character["weapons"]["Bow"] = 0
+    character["weapons"]["Huge sword (+70dmg)"] = 0
     character["weapons"]["Dagger (+20dmg)"] = 0
     character["weapons"]["Club"] = 0
     character["weapons"]["Rusty sword (+30dmg)"] = 0
@@ -175,7 +191,7 @@ def fight_scenario(character, enemy:str, enemy_health):
             weapon = "Unarmed"
         weapon_damage = {
         "Sword (+50dmg)": 50,
-        "Bow": 10,
+        "Huge sword (+70dmg)": 70,
         "Dagger (+20dmg)": 20,
         "Club": 45,
         "Rusty sword (+30dmg)": 30,
@@ -183,8 +199,8 @@ def fight_scenario(character, enemy:str, enemy_health):
         }
         entities = {
             "Ogre": 10,
-            "Elf": 72,
-            "Troll": 50,
+            "Elf": 55,
+            "Jailer": 30,
             "Skeleton": 22
         }
         critical = random.randint(0, 1)
@@ -199,7 +215,7 @@ def fight_scenario(character, enemy:str, enemy_health):
                     time.sleep(1)
                     return damage
                 else:
-                    damage = floor(damage * 1.4)
+                    damage = floor(damage * 1.5)
                     print("You hit for", damage, "(Critical!)")
                     time.sleep(1)
                     return damage
@@ -211,7 +227,7 @@ def fight_scenario(character, enemy:str, enemy_health):
         else:
             damage = entities[entity]
             if critical:
-                damage = floor(damage * 1.4)
+                damage = floor(damage * 1.1)
                 print("Enemy hit you for", damage, "(Critical!)")
                 time.sleep(1)
                 return damage
@@ -222,6 +238,7 @@ def fight_scenario(character, enemy:str, enemy_health):
             
 
     while not(character["health"] <= 0 or enemy_health <= 0):
+        print("-"*30)
         print(enemy + " health:", enemy_health)
         print("-"*30)
         print("Your health:", character["health"])
