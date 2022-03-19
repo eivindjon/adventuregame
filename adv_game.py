@@ -1,5 +1,10 @@
 from json import loads, dump
+from logging import critical
+from re import L
 import time
+import random
+from math import floor
+
 def h():
     """
     Prints available commands
@@ -49,11 +54,18 @@ def choice(text = "Select: ") -> None:
     elif user_choice == "h":
         h()
     elif user_choice == "p":
-        print(character_data["last_page_number"])
-        if character_data["last_page_number"] == 2:
+        if character_data["last_page_number"] == 2 and 3 not in character_data["pages_visited"]:
+            character_data = read_character_data()
             character_data["weapons"]["Rusty sword"] = 1
             save_character_data(character_data)
-        
+    elif user_choice == "f":
+        if character_data["last_page_number"] == 1:
+            fight_scenario(character_data,"Ogre", 100)
+    elif user_choice == "o":
+        if character_data["last_page_number"] == 4 and 5 not in character_data["pages_visited"]:
+            character_data["weapons"]["Sword"] = 1
+            character_data["potions"] += 2
+            save_character_data(character_data)
     return user_choice
 
 def new_game(character) -> None:
@@ -71,6 +83,7 @@ def new_game(character) -> None:
     character["weapons"]["Club"] = 0
     character["weapons"]["Rusty sword"] = 0
     character["equipped weapon"] = ""
+    character["pages_visited"] = []
     save_character_data(character)
 
 def read_character_data()-> dict:
@@ -91,7 +104,7 @@ def save_character_data(character)-> None:
         character (dict): character info
     """
     with open("save.json", "w") as save_file:
-        save_file.flush()
+        save_file.truncate()
         dump(character, save_file, indent=4)
 
 def equip_character(character)-> None:
@@ -119,7 +132,58 @@ def equip_character(character)-> None:
                 print("Equipped weapon: " + weapon)
                 save_character_data(character)
                 return
-    
+
+def fight_scenario(character, enemy:str, enemy_health):
+    health = character["health"]
+    def attack(weapon, entity):
+        if weapon == "":
+            weapon = "Unarmed"
+        weapon_damage = {
+        "Sword": 50,
+        "Bow": 10,
+        "Dagger": 15,
+        "Club": 45,
+        "Rusty sword": 30,
+        "Unarmed": 1
+        }
+        entities = {
+            "Ogre": 10,
+            "Elf": 72,
+            "Troll": 50
+        }
+        critical = random.randint(0, 1)
+        if entity == "self":
+            damage = weapon_damage[weapon]
+            if critical:
+                damage = floor(damage * 1.4)
+            return damage
+        else:
+            damage = entities[entity]
+            if critical:
+                damage = floor(damage * 1.4)
+            return damage
+            
+
+    while not(health < 0 or enemy_health < 0):
+        print(enemy + " health:", enemy_health)
+        print("-"*30)
+        print("Your health:", character["health"])
+        print("-"*30)
+        user_action = input("Choose action:\n(A) Attack with: " + character["equipped weapon"] + "\n(D) Drink potion\nSelect: ")
+        if user_action == "D":
+            drink_potion(character)
+        else:
+            #Your attack
+            enemy_health -= attack(character["equipped weapon"], "self")
+            #Enemy attack
+            character["health"] -= attack("Ogre", enemy)
+    if character["health"] > 0:
+        print("You have slain" + enemy)
+        save_character_data(character)
+    else:
+        print("You have died.. Game over.")
+        new_game(character)
+
 def drink_potion(character)-> None:
     """Uses potions to heal a character.
 
@@ -178,6 +242,7 @@ def main()-> None:
         new_game_choice = str(choice("(N) New game\n(L) Load game\nSelect: ").upper())
         if new_game_choice == "N":
             new_game(character_data)
+            character_data = read_character_data()
             start_game = True
         elif new_game_choice == "L":
             loading_string = "#####LOADING#####\n"
@@ -190,7 +255,9 @@ def main()-> None:
     while page_number >= 0:
         page_number = read_alternatives(read_page(page_number))
         if not page_number == -1:
+            character_data = read_character_data()
             character_data["last_page_number"] = page_number
+            character_data["pages_visited"].append(page_number)
             save_character_data(character_data)
 
 

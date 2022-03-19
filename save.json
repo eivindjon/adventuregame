@@ -1,5 +1,5 @@
 {
-    "last_page_number": 3,
+    "last_page_number": 0,
     "health": 100,
     "potions": 0,
     "weapons": {
@@ -9,5 +9,6 @@
         "Club": 0,
         "Rusty sword": 0
     },
-    "equipped weapon": ""
+    "equipped weapon": "",
+    "pages_visited": []
 }
