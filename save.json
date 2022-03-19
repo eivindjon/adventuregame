@@ -1,14 +1,30 @@
 {
-    "last_page_number": 0,
-    "health": 100,
-    "potions": 0,
+    "last_page_number": 4,
+    "health": 64,
+    "potions": 1,
     "weapons": {
-        "Sword": 0,
+        "Sword (+50dmg)": 1,
         "Bow": 0,
-        "Dagger": 0,
+        "Dagger (+20dmg)": 1,
         "Club": 0,
-        "Rusty sword": 0
+        "Rusty sword (+30dmg)": 1
     },
-    "equipped weapon": "",
-    "pages_visited": []
+    "equipped weapon": "Dagger (+20dmg)",
+    "pages_visited": [
+        2,
+        3,
+        0,
+        1,
+        4,
+        5,
+        6,
+        7,
+        0,
+        1,
+        4,
+        1,
+        4,
+        1,
+        4
+    ]
 }
