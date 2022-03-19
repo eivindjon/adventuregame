@@ -49,12 +49,13 @@
     [
         "Before you stands a skeleton",
         [
+            ["F", "Fight", 7],
             ["Q", "Quit", -1],
             ["B", "Go Back", 0]
         ]
     ],
     [
-        "You are at Right.",
+        "You rummage through the remains of the skeleton and find two potions and a dagger. You put the items in your backpack",
         [
             ["Q", "Quit", -1],
             ["B", "Go Back", 0]

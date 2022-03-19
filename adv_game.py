@@ -86,6 +86,11 @@ def choice(text = "Select: ") -> None:
             character_data=read_character_data()
             if fight == -1:
                 return "Q"
+        elif character_data["last_page_number"] == 6:
+            fight = fight_scenario(character_data,"Skeleton", 140)
+            character_data=read_character_data()
+            if fight == -1:
+                return "Q"
     elif user_choice == "o":
         if character_data["last_page_number"] == 4 and not visited_before(5):
             character_data["weapons"]["Sword (+50dmg)"] = 1
@@ -174,7 +179,8 @@ def fight_scenario(character, enemy:str, enemy_health):
         entities = {
             "Ogre": 10,
             "Elf": 72,
-            "Troll": 50
+            "Troll": 50,
+            "Skeleton": 22
         }
         critical = random.randint(0, 1)
         if entity == "self":
@@ -193,7 +199,6 @@ def fight_scenario(character, enemy:str, enemy_health):
             damage = entities[entity]
             if critical:
                 damage = floor(damage * 1.4)
-                print("Critical hit!")
                 print("Enemy hit you for", damage, "(Critical!)")
                 time.sleep(1)
                 return damage
