@@ -82,7 +82,10 @@ def choice(text = "Select: ") -> None:
             save_character_data(character_data)
     elif user_choice == "f":
         if character_data["last_page_number"] == 1:
-            fight_scenario(character_data,"Ogre", 100)
+            fight = fight_scenario(character_data,"Ogre", 100)
+            character_data=read_character_data()
+            if fight == -1:
+                return "Q"
     elif user_choice == "o":
         if character_data["last_page_number"] == 4 and not visited_before(5):
             character_data["weapons"]["Sword (+50dmg)"] = 1
@@ -178,12 +181,26 @@ def fight_scenario(character, enemy:str, enemy_health):
             damage = weapon_damage[weapon]
             if critical:
                 damage = floor(damage * 1.4)
-            return damage
+                print("You hit for", damage, "(Critical!)")
+                time.sleep(1)
+                return damage
+            else:
+                print("You hit for", damage)
+                time.sleep(1)
+                return damage
+
         else:
             damage = entities[entity]
             if critical:
                 damage = floor(damage * 1.4)
-            return damage
+                print("Critical hit!")
+                print("Enemy hit you for", damage, "(Critical!)")
+                time.sleep(1)
+                return damage
+            else:
+                print("Enemy hit you for", damage)
+                time.sleep(1)
+                return damage
             
 
     while not(character["health"] < 0 or enemy_health < 0):
@@ -191,7 +208,10 @@ def fight_scenario(character, enemy:str, enemy_health):
         print("-"*30)
         print("Your health:", character["health"])
         print("-"*30)
-        user_action = input("Choose action:\n(A) Attack with: " + character["equipped weapon"] + "\n(D) Drink potion\nSelect: ")
+        if character["equipped weapon"] != "":
+            user_action = input("Choose action:\n(A) Attack with: " + character["equipped weapon"] + "\n(D) Drink potion\nSelect: ").upper()
+        else:
+            user_action = input("Choose action:\n(A) Attack with: " + "Unarmed (+1dmg)" + "\n(D) Drink potion\nSelect: ").upper()
         if user_action == "D":
             drink_potion(character)
         else:
@@ -200,19 +220,19 @@ def fight_scenario(character, enemy:str, enemy_health):
             #Enemy attack
             character["health"] -= attack("Ogre", enemy)
     if character["health"] > 0:
-        print("You have slain" + enemy)
+        print("You have slain " + enemy)
         save_character_data(character)
         return
     else:
-        print("You have died.. Game over.")
+        print("You have died..")
         new_game(character)
         character["health"] = -1
         time.sleep(0.2)
-        loading_string = "#####RESPAWNING#####\n"
+        loading_string = "#####GAME OVER#####\n"
         for c in loading_string:
                 print(c, end='')
                 time.sleep(0.1)
-        return
+        return -1
 
 def drink_potion(character)-> None:
     """Uses potions to heal a character.

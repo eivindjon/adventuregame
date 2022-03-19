@@ -1,6 +1,6 @@
 [
     [
-        "Where do you want to move?\nChoose wisely.", 
+        "The cave entrance you entered has collapsed. You will have to find another way to the surface.\nThe cave system is vast, dark and full of nasty surprises.\nYou see two caves ahead. Which direction do you want to go?\nChoose wisely.", 
         [
             ["Q", "Quit", -1],
             ["L", "Left", 1],
@@ -24,7 +24,7 @@
         ]
     ],
     [
-        "You picked up the sword from the pile of bones",
+        "You picked up the sword from the pile of bones and put it in your backpack",
         [
             ["Q", "Quit", -1],
             ["B", "Go Back", 0]
@@ -34,19 +34,20 @@
         "After defeating the Ogre you enter a room with a chest",
         [
             ["Q", "Quit", -1],
-            ["B", "Go Back", 0],
+            ["B", "Go Back", 1],
             ["O", "Open chest", 5]
         ]
     ],
     [
-        "You obtained two potions and a nice looking sword.",
+        "You obtained two potions and a nice looking sword. You put them in your backpack",
         [
             ["Q", "Quit", -1],
-            ["B", "Go Back", 1]
+            ["B", "Go Back", 1],
+            ["G", "Go to the next room", 6]
         ]
     ],
     [
-        "You are at Right.",
+        "Before you stands a skeleton",
         [
             ["Q", "Quit", -1],
             ["B", "Go Back", 0]
