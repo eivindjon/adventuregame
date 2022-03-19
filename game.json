@@ -2,13 +2,15 @@
     [
         "Where do you want to move?\nChoose wisely.", 
         [
+            ["Q", "Quit", -1],
             ["L", "Left", 1],
             ["R", "Right", 2]
         ]
     ],
     [
-        "You are at Left.",
+        "You enter a big room. At the end of the room you see an ogre that guards a door.",
         [
+            ["F", "Fight", 4],
             ["Q", "Quit", -1],
             ["B", "Go Back", 0]
         ]
@@ -29,17 +31,18 @@
         ]
     ],
     [
-        "You are at Right.",
+        "After defeating the Ogre you enter a room with a chest",
         [
             ["Q", "Quit", -1],
-            ["B", "Go Back", 0]
+            ["B", "Go Back", 0],
+            ["O", "Open chest", 5]
         ]
     ],
     [
-        "You are at Right.",
+        "You obtained two potions and a nice looking sword.",
         [
             ["Q", "Quit", -1],
-            ["B", "Go Back", 0]
+            ["B", "Go Back", 1]
         ]
     ],
     [
