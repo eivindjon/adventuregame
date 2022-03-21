@@ -23,7 +23,7 @@ def read_page(pn:int) -> list:
         data = file.read()
     lst = loads(data)
     #Ogre room if visited before
-    if visited_before(pn) and pn == 1:
+    if visited_before(4) and pn == 1:
         print(lst[12][0])
         return lst[12][1]
     #Jail if jailer is killed
@@ -35,11 +35,12 @@ def read_page(pn:int) -> list:
         print(lst[15][0])
         return lst[15][1]
     #Skeleton if visited before
-    elif visited_before(7) and pn == 7:
+    elif visited_before(7) and pn == 6:
         print(lst[14][0])
         return lst[14][1]
-    print(lst[pn][0])
-    return lst[pn][1]
+    else:
+        print(lst[pn][0])
+        return lst[pn][1]
 
 def read_alternatives(page: list) -> None:
     """Reads alternatives from list within page
