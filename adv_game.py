@@ -1,3 +1,5 @@
+# WRITTEN BY EIVIND JONASSEN AND LASSE ØRSAL
+# 2022
 from json import loads, dump
 from logging import critical
 import time
