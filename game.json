@@ -91,7 +91,39 @@
         "After slaying the obnoxious elf you exit the door and find yourself in the woods. You breathe a sigh of relief and head home.",
         [
             ["Q", "Quit", -1],
+            ["B", "Go Back", 10]
+        ]
+    ],
+    [
+        "You walk past the decomposing Ogre..",
+        [
+            ["Q", "Quit", -1],
+            ["N", "Enter the room with the chest", 4],
             ["B", "Go Back", 0]
+        ]
+    ],
+    [
+        "The jail is silent. The jailer is dead..",
+        [
+            ["Q", "Quit", -1],
+            ["N", "Exit the jail", 10],
+            ["B", "Go Back", 7]
+        ]
+    ],
+    [
+        "The remains of the skeleton lies in the hallway..",
+        [
+            ["Q", "Quit", -1],
+            ["N", "Enter the jail", 8],
+            ["B", "Go Back", 5]
+        ]
+    ],
+    [
+        "The decapitated corpse of the elf has stopped moving.",
+        [
+            ["Q", "Quit", -1],
+            ["N", "Go outside", 11],
+            ["B", "Go Back", 8]
         ]
     ]
 ]

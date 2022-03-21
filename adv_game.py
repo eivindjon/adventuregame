@@ -22,6 +22,22 @@ def read_page(pn:int) -> list:
     with open("game.json") as file:
         data = file.read()
     lst = loads(data)
+    #Ogre room if visited before
+    if visited_before(pn) and pn == 1:
+        print(lst[12][0])
+        return lst[12][1]
+    #Jail if jailer is killed
+    elif visited_before(9) and pn == 8:
+        print(lst[13][0])
+        return lst[13][1]
+    #Elf if visited before
+    elif visited_before(11) and pn == 10:
+        print(lst[15][0])
+        return lst[15][1]
+    #Skeleton if visited before
+    elif visited_before(7) and pn == 7:
+        print(lst[14][0])
+        return lst[14][1]
     print(lst[pn][0])
     return lst[pn][1]
 
@@ -342,6 +358,7 @@ def main()-> None:
     h()
     while page_number >= 0:
         page_number = read_alternatives(read_page(page_number))
+        
         if not page_number == -1:
             character_data = read_character_data()
             character_data["last_page_number"] = page_number
