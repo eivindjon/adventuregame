@@ -4,11 +4,11 @@ import time
 import random
 from math import floor
 
-def h()->None:
+def hlp()->None:
     """
     Prints available commands
     """
-    print("Available commands:\n'status': Shows character health, potions and equipped weapons\n'equip': Shows available weapons and allows you to equip them\n'heal': Consumes a potion that heals for 30 health\n'h': Show this message again")
+    print("Available commands:\n'status': Shows character health, potions and equipped weapons\n'equip': Shows available weapons and allows you to equip them\n'heal': Consumes a potion that heals for 30 health\n'hlp': Show this message again")
 
 def read_page(pn:int) -> list:
     """Reads content of the page
@@ -42,7 +42,7 @@ def read_page(pn:int) -> list:
         print(lst[pn][0])
         return lst[pn][1]
 
-def read_alternatives(page: list) -> None:
+def read_alternatives(page: list) -> int:
     """Reads alternatives from list within page
 
     Args:
@@ -90,8 +90,8 @@ def choice(text:str = "Select: ") -> None:
         save_character_data(character_data)
     elif user_choice == "heal":
         drink_potion(character_data)
-    elif user_choice == "h":
-        h()
+    elif user_choice == "hlp":
+        hlp()
     elif user_choice == "p":
         if character_data["last_page_number"] == 2 and not visited_before(3):
             character_data = read_character_data()
@@ -133,7 +133,9 @@ def choice(text:str = "Select: ") -> None:
             save_character_data(character_data)
     return user_choice
 
-def new_game(character) -> None:
+
+
+def new_game(character:dict) -> None:
     """Resets all character data to default values
 
     Args:
@@ -162,7 +164,7 @@ def read_character_data()-> dict:
     character_data = loads(save_data)
     return character_data
 
-def save_character_data(character)-> None:
+def save_character_data(character:dict)-> None:
     """Saves character data to file
 
     Args:
@@ -172,7 +174,7 @@ def save_character_data(character)-> None:
         save_file.truncate()
         dump(character, save_file, indent=4)
 
-def equip_character(character)-> None:
+def equip_character(character:dict)-> None:
     """Equips weapons to character
 
     Args:
@@ -201,9 +203,9 @@ def equip_character(character)-> None:
                 save_character_data(character)
                 return
 
-def fight_scenario(character, enemy:str, enemy_health):
+def fight_scenario(character:dict, enemy:str, enemy_health:int):
     health = character["health"]
-    def attack(weapon, entity):
+    def attack(weapon, entity)->int:
         if weapon == "":
             weapon = "Unarmed"
         weapon_damage = {
@@ -317,7 +319,7 @@ def drink_potion(character)-> None:
         save_character_data(character)
         return
     
-def character_status(character)-> None:
+def character_status(character:dict)-> None:
     """Shows current health, potions and equipped weapons.
 
     Args:
@@ -356,7 +358,7 @@ def main()-> None:
                 time.sleep(0.1)
             start_game = True
 
-    h()
+    hlp()
     while page_number >= 0:
         page_number = read_alternatives(read_page(page_number))
         

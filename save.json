@@ -1,44 +1,14 @@
 {
-    "last_page_number": 7,
+    "last_page_number": 0,
     "health": 100,
-    "potions": 2,
+    "potions": 0,
     "weapons": {
-        "Sword (+50dmg)": 1,
-        "Huge sword (+70dmg)": 1,
-        "Dagger (+20dmg)": 1,
+        "Sword (+50dmg)": 0,
+        "Huge sword (+70dmg)": 0,
+        "Dagger (+20dmg)": 0,
         "Club": 0,
-        "Rusty sword (+30dmg)": 1
+        "Rusty sword (+30dmg)": 0
     },
-    "equipped weapon": "Huge sword (+70dmg)",
-    "pages_visited": [
-        2,
-        3,
-        0,
-        1,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        10,
-        8,
-        7,
-        6,
-        5,
-        1,
-        0,
-        1,
-        4,
-        5,
-        6,
-        8,
-        10,
-        11,
-        10,
-        8,
-        7
-    ]
+    "equipped weapon": "",
+    "pages_visited": []
 }
