@@ -1,8 +1,8 @@
-In this assignment you will write a text adventure meta-game.
+In this assignment, you will write a text adventure meta-game.
 
-Your program will read a .json file like this one: game.json  Download game.jsondescribing a text adventure.
+Your program will read a .json file like this one: game.json  Download game. JSON describing a text adventure.
 
-Note the format of the .json file. It is a list of lists. Each inner list represents a page of the game and contains 2 elements: a text to be shown in the screen in case the page is reached and a list of options the player can chose while he/she is on that page. Each option is composed by a list of three elements containing: Letter for the option, text for the option, page number where the player will go if he/she takes that option.
+Note the format of the .json file. It is a list of lists. Each inner list represents a page of the game and contains 2 elements: a text to be shown in the screen in case the page is reached and a list of options the player can chose while he/she is on that page. Each option is composed by a list of three elements containing: Letter for the option, text for the option, and page number where the player will go if he/she takes that option.
 
 For example, consider the first page (index 0):
 
